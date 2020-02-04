@@ -13,7 +13,7 @@ public:
     void insertStart(node **s,int data);
     void insertLast(node **s, int data);
     void insertAfter(node **s, node *ptr, int data);
-    node *findNode(node **s, int data);
+    node* findNode(node **s, int data);
     void deleteFirst(node **s);
     void deleteLast(node **s);
     void deleteIntermediate(node **s,node *ptr);
@@ -26,24 +26,39 @@ int main()
 {
     doubly d;
     d.start=NULL;
-    d.insertStart(&d.start,30);
+    doubly::node *ptr;
     d.viewList(&d.start);
-//    d.insertLast(&start,20);
-//    ptr=findNode(&start,20);
-//    d.insertAfter(&start,ptr,30);
-//    d.deleteFirst(&start);
-//    d.deleteLast(&start);
-//    ptr=findNode(&start,20);
-//    d.deleteIntermediate(&start,ptr);
-//    d.viewList(&start);
-//    d.viewFirst(&start);
-//    d.deleteLast(&start);
+    d.insertStart(&d.start,10);
+    d.insertLast(&d.start,20);
+    cout<<endl;
+    ptr=d.findNode(&d.start,20);
+    d.insertAfter(&d.start,ptr,30);
+    cout<<endl;
+    ptr=d.findNode(&d.start,30);
+    d.insertAfter(&d.start,ptr,40);
+    cout<<endl;
+    d.insertLast(&d.start,50);
+    d.viewList(&d.start);
+    cout<<endl;
+    d.deleteFirst(&d.start);
+    d.viewList(&d.start);
+    cout<<endl;
+    d.deleteLast(&d.start);
+    d.viewList(&d.start);
+    cout<<endl;
+    ptr=d.findNode(&d.start,20);
+    d.deleteIntermediate(&d.start,ptr);
+    d.viewList(&d.start);
+    cout<<endl;
+    d.viewFirst(&d.start);
+    cout<<endl;
+    d.deleteLast(&d.start);
     return 0;
 }
 
 void doubly ::viewLast(node **s)
 {
-    if (*s==NULL)
+    if (*s==NULL)  // To check list is not empty.
     {
         cout<<"List is Empty.";
     }
@@ -92,22 +107,22 @@ void doubly ::viewList(node **s)
 }
 void doubly ::deleteIntermediate(node **s,node *ptr)
 {
-    if (*s==NULL)
+    if (*s==NULL)                                     // List is empty.
     {
         cout<<"Nothing is there to delete."<<endl;
     }
-    else if (ptr->prev==NULL)
+    else if (ptr->prev==NULL)                         // List has only node.
     {
         start=ptr->next;
         ptr->next->prev=NULL;
         delete(ptr);
     }
-    else if (ptr->next==NULL)
+    else if (ptr->next==NULL)                          // To check whether Pointer is holding last node.
     {
         ptr->prev->next=NULL;
         delete(ptr);
     }
-    else
+    else                                                // General case.
     {
         ptr->prev->next=ptr->next;
         ptr->next->prev=ptr->prev;
@@ -118,16 +133,16 @@ void doubly ::deleteLast(node **s)
 {
     node *p = new node;
     p=*s;
-    if (*s==NULL) // No Node is added.
+    if (*s==NULL)                                     // No Node is added.
     {
         cout<<"Nothing is there not Delete."<<endl;
     }
-    else if ((*s)->next==NULL) // List has only one node.
+    else if ((*s)->next==NULL)                       // List has only one node.
     {
         start=NULL;
         delete(p);
     }
-    else // List has more than one node.
+    else                                              // List has more than one node.
     {
         while(p->next!=NULL)
         {
@@ -153,7 +168,7 @@ void doubly::deleteFirst(node **s)
     }
 
 }
-node doubly:: *findNode(node **s, int data)
+doubly::node* doubly:: findNode(node **s, int data)
 {
     if (*s==NULL)
     {

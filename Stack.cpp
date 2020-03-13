@@ -4,15 +4,11 @@ using namespace std;
 
 struct ArrayStack
 {
-    unsigned capacity;
-    int *ptr;
-    int top;
+    unsigned capacity;int *ptr;int top;
 
     void createStack(int cap)
     {
-        capacity=cap;
-        top=-1;
-        ptr=new int[capacity];
+        capacity=cap;top=-1;ptr=new int[capacity];
     }
     int isFull()
     {
@@ -32,15 +28,13 @@ struct ArrayStack
     {
         if(isFull()==1)
             cout<<"Stack is Full."<<endl;
-        top++;
-        ptr[top]=data;
+        top++;ptr[top]=data;
     }
     int stackPop()
     {
         if(isEmpty()==1)
             cout<<"Stack is Empty."<<endl;
-        int item=ptr[top];
-        top--;
+        int item=ptr[top];top--;
         return item;
     }
 };
@@ -53,20 +47,14 @@ int main()
 
     while(1)
     {
-        cout<<"\n 1: Push";
-        cout<<"\n 2: Pull";
-        cout<<"\n Enter Your Choice:"<<endl;
-        cin>>choice;
+        cout<<"\n 1: Push";cout<<"\n 2: Pull";cout<<"\n Enter Your Choice:"<<endl;cin>>choice;
         switch(choice)
         {
         case 1:
-            cout<<"Enter a number: ";
-            cin>>itm;
-            S->stackPush(itm);
+            cout<<"Enter a number: ";cin>>itm;S->stackPush(itm);
             break;
         case 2:
-            itm=S->stackPop();
-            cout<<itm<<endl;
+            itm=S->stackPop();cout<<itm<<endl;
             break;
         case 3:
             break;
